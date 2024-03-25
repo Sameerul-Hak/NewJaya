@@ -7,8 +7,10 @@ import {url} from '../../Config';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [name,setname]=useState("");
+  const[ic,setic]=useState("");
+    const location = useLocation();
+    const navigate = useNavigate();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -37,6 +39,17 @@ const Login = () => {
       alert('Invalid credentials');
     }
   };
+  const openCertificateUrl = () => {
+    // Construct the URL with name and ic
+    const modifiedFullName = name.replace(/\//g, "-");
+    
+    navigate(`/certificate/student/${modifiedFullName}/3/${ic}`)
+  };
+  const openCertificateUrlothers = () => {
+    const modifiedFullName = name.replace(/\//g, "-");
+    // Construct the URL with name and ic
+    navigate(`/certificate/others/${modifiedFullName}/3/${ic}`)
+  };
 
   return (
     <div className="admin-login-page">
@@ -48,6 +61,18 @@ const Login = () => {
           <button type="submit" className="admin-login-button">Login</button>
         </form>
         <p className="admin-login-register-text">Do not have an account? <Link to="/register">Register</Link></p>
+      </div>
+      <div  className="admin-login-container">
+        <h1>Admin certificate students & teacher</h1>
+        <input placeholder='enter name' onChange={(e)=>setname(e.target.value)} className="admin-login-input" />
+        <input placeholder='enter icn number' onChange={(e)=>setic(e.target.value)} className="admin-login-input" />
+        <button onClick={openCertificateUrl}  className="admin-login-button">get certificate</button>
+      </div>
+      <div  className="admin-login-container">
+        <h1>Admin certificate Others</h1>
+        <input placeholder='enter name' onChange={(e)=>setname(e.target.value)} className="admin-login-input" />
+        <input placeholder='enter icn number' onChange={(e)=>setic(e.target.value)} className="admin-login-input" />
+        <button onClick={openCertificateUrlothers}  className="admin-login-button">get certificate</button>
       </div>
     </div>
   );

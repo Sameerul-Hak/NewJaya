@@ -14,7 +14,7 @@ function Teacher() {
   const [state, setstate] = useState('');
   const [district, setDistrict] = useState('');
   const {eventname}=useParams();
-  const schoolStates = ['SELANGOR', 'Kuala Lumpur'];
+  const schoolStates = ['SELANGOR', 'Kuala Lumpur','Others'];
   const [password, setPassword] = useState('');
   const [Email, setEmail] = useState('');
   const navigate=useNavigate();
@@ -30,6 +30,7 @@ function Teacher() {
     'Hulu Langat',
     'Sepang',
     'Kuala Langat',
+    'Others'
   ];
 
   const kualaLumpurDistricts = [
@@ -44,6 +45,7 @@ function Teacher() {
     'Cheras',
     'Bandar Tun Razak',
     'Seputih',
+      'Others'
   ];
   const [location, setLocation] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -103,10 +105,17 @@ function Teacher() {
     } else if (state === 'Kuala Lumpur') {
       setDistrict(kualaLumpurDistricts[0]); // Set default district for Kuala Lumpur
     }
+    else {
+      setDistrict('Others');
+    }
   };
 
   const handleSchoolDistrictChange = (district) => {
-    setDistrict(district);
+    if (state === 'Others') {
+      setDistrict('Others'); // Set district to Others if the state is Others
+    } else {
+      setDistrict(district); // Otherwise, set district based on the selected value
+    }
   };
 
 
@@ -152,7 +161,7 @@ function Teacher() {
       const nullFormData = Object.fromEntries(allFields.map((field) => [field, null]));
       const icNumberRegex = /^\d{6}-\d{2}-\d{4}$/;
       if (!icNumber.match(icNumberRegex)) {
-        alert('Error', 'Invalid IC number format. Use: 650423-07-5659');
+        alert('Invalid IC number format. Use: 650423-07-5659');
         setRegistering(false)
 
         return;
@@ -237,7 +246,7 @@ function Teacher() {
 
       <label className="label">
         IC Number:
-        <input className="input-field" type="text" value={icNumber} onChange={(e) => setIcNumber(e.target.value)}  required/>
+        <input className="input-field" type="text" value={icNumber} onChange={(e) => setIcNumber(e.target.value)}  required placeholder='XXXXXX-XX-XXXX'/>
       </label>
 
       <label className="label">
@@ -284,7 +293,7 @@ function Teacher() {
                     {district}
                   </option>
                 ))
-              : null}
+              : <option>Others</option>}
           </select>
         </label>
         <label className="label">

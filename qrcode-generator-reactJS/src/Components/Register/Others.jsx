@@ -19,7 +19,7 @@ function Others() {
   const {eventname}=useParams();
   const [password, setPassword] = useState('');
 
-  const schoolStates = ['SELANGOR', 'Kuala Lumpur'];
+  const schoolStates = ['SELANGOR', 'Kuala Lumpur','Others'];
   const selangorDistricts = [
     'Sabak Bernam',
     'Hulu Selangor',
@@ -30,6 +30,7 @@ function Others() {
     'Hulu Langat',
     'Sepang',
     'Kuala Langat',
+    'Others'
   ];
 
   const kualaLumpurDistricts = [
@@ -44,6 +45,7 @@ function Others() {
     'Cheras',
     'Bandar Tun Razak',
     'Seputih',
+    'Others'
   ];
   const [location, setLocation] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -94,14 +96,13 @@ function Others() {
     return d;
   };
 
+
   
   const YOUR_OFFICE_LATITUDE =3.0971059036230657;
   const YOUR_OFFICE_LONGITUDE =101.64535056681801;
 
-  // const YOUR_OFFICE_LATITUDE =12.968154202937821;
-  // const YOUR_OFFICE_LONGITUDE =77.65520916404631;
-  // const YOUR_OFFICE_LATITUDE =12.9707624;
-  // const YOUR_OFFICE_LONGITUDE =80.0428828;
+ 
+
 
 
 
@@ -112,11 +113,19 @@ function Others() {
       setDistrict(selangorDistricts[0]); // Set default district for Selangor
     } else if (state === 'Kuala Lumpur') {
       setDistrict(kualaLumpurDistricts[0]); // Set default district for Kuala Lumpur
+    } else {
+      // If the state is "Others", set the district to "Others"
+      setDistrict('Others');
     }
   };
+  
 
   const handledistrictchange = (district) => {
-    setDistrict(district);
+    if (state === 'Others') {
+      setDistrict('Others'); // Set district to Others if the state is Others
+    } else {
+      setDistrict(district); // Otherwise, set district based on the selected value
+    }
   };
 
   const handleFormSubmit = async (e) => {
@@ -286,7 +295,7 @@ function Others() {
                   {district}
                 </option>
               ))
-            : null}
+            : <option>Others</option>}
         </select>
       </label>
 

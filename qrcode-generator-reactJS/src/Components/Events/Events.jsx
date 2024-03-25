@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Events.css'; // Import the custom styles
 import {url} from '../../Config';
 
 const Events = () => {
   const [events, setEvents] = useState([]);
+
 
   useEffect(() => {
     fetchEvents();
@@ -38,7 +39,7 @@ const Events = () => {
       console.error('Error turning off certificate:', error);
     }
   };
-
+ 
   return (
     <div className='events-container'>
       <div className='events-top'>
@@ -79,6 +80,7 @@ const Events = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 }

@@ -59,16 +59,19 @@ function CertificateLogin() {
         localStorage.setItem('eventId', eventId);
         setwho(loginResponse.data.user.whoami);
         // setfullname(loginResponse.data.user.fullName);
-        seticnumber(loginResponse.data.user.icNumber)
+        seticnumber(loginResponse.data.user.icNumber);
+        // Replace "/" with "-" in the full name
+        const modifiedFullName = loginResponse.data.user.fullName.replace(/\//g, "-");
+  
         // Ask the user whether to use account username or enter a new name
-        const shouldUseAccountName = window.confirm(`Do you want to take your certificate with the name "${loginResponse.data.user.fullName}"?`);
+        const shouldUseAccountName = window.confirm(`Do you want to take your certificate with the name "${ loginResponse.data.user.fullName}"?`);
         if (!shouldUseAccountName) {
           setAskNewName(true); // Set the state to ask for a new name
         } else {
           if (loginResponse.data.user.whoami === 'others') {
-            navigate(`/createcertificate/${loginResponse.data.user.fullName}/${eventId}/others/${loginResponse.data.user.icNumber}`);
+            navigate(`/createcertificate/${modifiedFullName}/${eventId}/others/${loginResponse.data.user.icNumber}`);
           } else if (loginResponse.data.user.whoami === 'student' || loginResponse.data.user.whoami === 'teacher') {
-            navigate(`/createcertificate/${loginResponse.data.user.fullName}/${eventId}/${loginResponse.data.user.icNumber}`);
+            navigate(`/createcertificate/${modifiedFullName}/${eventId}/${loginResponse.data.user.icNumber}`);
           }
         }
       } else {
@@ -79,6 +82,7 @@ function CertificateLogin() {
       // setError(`${error}`);
     }
   };
+  
   
   const handleNewNameSubmit = () => {
     // Navigate to the certificate download page with the new name

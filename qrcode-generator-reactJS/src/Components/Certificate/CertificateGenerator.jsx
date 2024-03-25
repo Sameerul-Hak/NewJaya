@@ -11,14 +11,16 @@ const capitalizeFirstLetter = (name) => {
 };
 
 const generateCertificate = (name, ic) => {
+  const modifiedName = name.replace(/-/g, "/");
+
   const doc = new jsPDF();
 
   // Add background image
   doc.addImage(img, 'PNG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
 
   // Add recipient name with capitalized first letter
-  const capitalizedFirstName = capitalizeFirstLetter(name);
-  doc.setFontSize(34);
+  const capitalizedFirstName = capitalizeFirstLetter(modifiedName);
+  doc.setFontSize(24);
   doc.setFont('helvetica');
   doc.text(`${capitalizedFirstName} \n ${ic}`, 125, 99, { align: 'center' });
 
@@ -71,7 +73,7 @@ function CertificateGenerator() {
 
   return (
     <div className="certificate-container">
-      <h1 className="certificate-heading">Hey {name}!</h1>
+      <h1 className="certificate-heading">Hey {name.replace(/-/g, "/")}!</h1>
       <p className="certificate-message">You can download your certificate by clicking the button below:</p>
       <div className="button-container">
         {isVisible && (

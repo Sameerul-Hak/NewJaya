@@ -30,12 +30,12 @@ const generateCertificate = (name, ic) => {
   localStorage.removeItem('eventId');
 };
 
-function CertificateforOthers() {
+function CertificateforOthersman() {
   const { name, eventid } = useParams();
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
   const { ic } = useParams();
-  const [reloadCount, setReloadCount] = useState(0); // State to track reload count
+  // const [reloadCount, setReloadCount] = useState(0); // State to track reload count
 
   useEffect(() => {
     const decide = async () => {
@@ -49,26 +49,26 @@ function CertificateforOthers() {
     decide();
   }, []);
 
-  useEffect(() => {
-    const userToken = localStorage.getItem('userToken');
-    const userId = localStorage.getItem('userId');
-    const eventId = localStorage.getItem('eventId');
-    if (!userToken || !userId || !eventId) {
-      navigate('/certificateLoging');
-    }
+  // useEffect(() => {
+  //   const userToken = localStorage.getItem('userToken');
+  //   const userId = localStorage.getItem('userId');
+  //   const eventId = localStorage.getItem('eventId');
+  //   if (!userToken || !userId || !eventId) {
+  //     navigate('/certificateLoging');
+  //   }
     
-    // Increment the reload count on each render
-    setReloadCount(prevCount => prevCount + 1);
-  }, [navigate]);
+  //   // Increment the reload count on each render
+  //   setReloadCount(prevCount => prevCount + 1);
+  // }, [navigate]);
 
-  useEffect(() => {
-    // Clear local storage if reload count exceeds 1
-    if (reloadCount > 1) {
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('eventId');
-    }
-  }, [reloadCount]);
+  // useEffect(() => {
+  //   // Clear local storage if reload count exceeds 1
+  //   if (reloadCount > 1) {
+  //     localStorage.removeItem('userToken');
+  //     localStorage.removeItem('userId');
+  //     localStorage.removeItem('eventId');
+  //   }
+  // }, [reloadCount]);
 
   return (
     <div className="certificate-container">
@@ -86,4 +86,4 @@ function CertificateforOthers() {
   );
 }
 
-export default CertificateforOthers;
+export default CertificateforOthersman;

@@ -45,7 +45,7 @@ function Student() {
   const handleMotherStatusChange = (e) => {
     setMotherStatus(e.target.value);
   };
-  const schoolStates = ['SELANGOR', 'Kuala Lumpur'];
+  const schoolStates = ['SELANGOR', 'Kuala Lumpur','Others'];
   const [location, setLocation] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -121,6 +121,7 @@ function Student() {
     'Hulu Langat',
     'Sepang',
     'Kuala Langat',
+    'Others'
   ];
 
   const kualaLumpurDistricts = [
@@ -135,6 +136,7 @@ function Student() {
     'Cheras',
     'Bandar Tun Razak',
     'Seputih',
+    'Others'
   ];
 
 
@@ -145,10 +147,17 @@ function Student() {
       setSelectedSchoolDistrict(selangorDistricts[0]); // Set default district for Selangor
     } else if (selectedSchoolState === 'Kuala Lumpur') {
       setSelectedSchoolDistrict(kualaLumpurDistricts[0]); // Set default district for Kuala Lumpur
+    }else{
+      setSelectedSchoolDistrict("Others")
     }
   };
 
   const handleSchoolDistrictChange = (selectedSchoolDistrict) => {
+    if (selectedSchoolState === 'Others') {
+      setSelectedSchoolDistrict('Others'); // Set district to Others if the state is Others
+    } else {
+      setSelectedSchoolDistrict(selectedSchoolDistrict); // Otherwise, set district based on the selected value
+    }
     setSelectedSchoolDistrict(selectedSchoolDistrict);
   };
 
@@ -159,10 +168,18 @@ function Student() {
     } else if (selectedState === 'Kuala Lumpur') {
       setSelectedDistrict(kualaLumpurDistricts[0]); // Set default district for Kuala Lumpur
     }
+    else {
+      // If the state is "Others", set the district to "Others"
+      setSelectedDistrict('Others');
+    }
   };
 
   const handleDistrictChange = (selectedDistrict) => {
-    setSelectedDistrict(selectedDistrict);
+    if (selectedState === 'Others') {
+      setSelectedDistrict('Others'); // Set district to Others if the state is Others
+    } else {
+      setSelectedDistrict(selectedDistrict); // Otherwise, set district based on the selected value
+    }
   };
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -389,7 +406,7 @@ function Student() {
                     {district}
                   </option>
                 ))
-              : null}
+              : <option>Others</option>}
           </select>
         </label>
 
@@ -553,7 +570,7 @@ function Student() {
                     {district}
                   </option>
                 ))
-              : null}
+              :<option>Others</option>}
           </select>
         </label>
   

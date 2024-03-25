@@ -14,6 +14,8 @@ import Others from './Components/Register/Others';
 import CertificateLogin from './Components/Login/CertificateLogin';
 import ForgetPassword from './Components/Register/ForgetPassword';
 import CertificateforOthers from './Components/Certificate/CertificateforOthers';
+import CertificateGeneratorman from './Components/manual/CertificateGenerator';
+import CertificateforOthersman from './Components/manual/CertificateforOthers';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
       <Route path='/:eventname/Others' element={<Others />} />
       <Route path='/certificateLoging' element={<CertificateLogin />} />
       <Route path='/certificateLoging/forget' element={<ForgetPassword />} />
+      <Route path='/certificate/student/:name/:eventid/:ic' element={<CertificateGeneratorman />} />
+      <Route path='/certificate/others/:name/:eventid/:ic' element={<CertificateforOthersman />} />
     </Routes>
     </Router>
 

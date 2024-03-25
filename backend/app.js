@@ -435,7 +435,9 @@ app.post("/auth/forgotPassword", async (req, res) => {
   }
 });
 
-
+app.post("/encrypt",(req,res)=>{
+  
+})
 
 
 app.listen(5000, () => {
